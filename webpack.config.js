@@ -24,6 +24,10 @@ module.exports = {
   devtool: 'source-map', // Maps output code to input (debug purposes)
   module: {
     rules: [
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
       { test: /\.css$/i, use: [MiniCssExtractPlugin.loader, 'css-loader'] },
       {
         test: /\.js$/,
