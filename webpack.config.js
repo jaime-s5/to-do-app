@@ -1,5 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+
 const path = require('path');
 
 module.exports = {
@@ -11,7 +13,8 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
   },
   devServer: {
-    contentBase: './build',
+    contentBase: path.resolve(__dirname, 'build'),
+    writeToDisk: true,
   },
   // Modified config
   plugins: [
@@ -20,14 +23,17 @@ module.exports = {
       template: './src/index.html',
     }),
     new MiniCssExtractPlugin(),
+    new CopyPlugin({
+      patterns: [{ from: 'src/assets', to: 'assets' }],
+    }),
   ],
   devtool: 'source-map', // Maps output code to input (debug purposes)
   module: {
     rules: [
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-      },
+      // {
+      //   test: /\.(png|svg|jpg|jpeg|gif)$/i,
+      //   type: 'asset/resource',
+      // },
       { test: /\.css$/i, use: [MiniCssExtractPlugin.loader, 'css-loader'] },
       {
         test: /\.js$/,
