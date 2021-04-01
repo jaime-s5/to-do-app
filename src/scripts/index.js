@@ -1,2 +1,5 @@
 import '../style/reset.css';
-import '../style/main.css';
+import '../style/index.css';
+import { generateProjectTabContent } from './modules/tab_content';
+
+generateProjectTabContent();
