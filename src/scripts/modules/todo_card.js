@@ -1,16 +1,20 @@
 import '../../style/todo_card.css';
 
+// TODO: Añadir atributos de datos para index de todo y proyecto
 function generateTodoCard(todo) {
   const title = `
-    <h4>Brush Teeth</h4>`;
+    <h4>${todo.title}</h4>`;
   const check = `
   <label class="container">
     <input type="checkbox">
   </label>`;
-  const leftDiv = `<div class="cardContainer cardContainerLeft">${check}${title}</div>`;
+  const leftDiv = `
+    <div class="cardContainer cardContainerLeft">
+      ${check}${title}
+    </div>`;
 
   const detailsButton = `<button class="detailsButton">DETAILS</button>`;
-  const dueDate = `<p>Dec 15th</p>`;
+  const dueDate = `<p>${todo.dueDate}</p>`;
   const edit = `
     <img
       class="editIcon"

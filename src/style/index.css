@@ -76,7 +76,8 @@
   cursor: pointer;
 }
 
-.tab:hover {
+.tab:hover,
+.active {
   background-color: var(--tab-hover-color);
 }
 
