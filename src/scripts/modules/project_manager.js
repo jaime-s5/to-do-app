@@ -21,7 +21,7 @@ function Project(name) {
   }
 
   function getMatchedTodo(index) {
-    return [_.clone(todos[index])];
+    return _.clone(todos[index]);
   }
 
   function getTodos() {

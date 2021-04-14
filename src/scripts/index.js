@@ -27,7 +27,7 @@ function switchTabs(event) {
 
   // Render content and make tab active
   if (tab.className.includes('inbox')) {
-    generateProjectTabContent();
+    generateProjectTabContent('inbox');
   } else if (tab.className.includes('today')) {
     generateTodayTabContent();
   } else if (tab.className.includes('week')) {

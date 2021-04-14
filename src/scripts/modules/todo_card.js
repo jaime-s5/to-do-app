@@ -1,7 +1,9 @@
 import '../../style/todo_card.css';
 
 // TODO: Añadir atributos de datos para index de todo y proyecto
-function generateTodoCard(todo) {
+function generateTodoCard(todoData) {
+  const todo = { ...todoData.todoObject };
+
   const title = `
     <h4>${todo.title}</h4>`;
   const check = `
@@ -32,8 +34,11 @@ function generateTodoCard(todo) {
       ${detailsButton}${dueDate}${edit}${remove}
     </div>`;
 
+  const dataAttributeProject = `data-project-pos=${todoData.project_id}`;
+  const dataAttributeTodo = `data-todo-pos=${todoData.todo_id}`;
+
   const todoCardDiv = `
-    <div class="todoCard">
+    <div class="todoCard" ${dataAttributeProject} ${dataAttributeTodo}>
     ${leftDiv}${rightDiv}
     </div>`;
 

@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import '../../style/tab_content.css';
 
 import generateTodoCard from './todo_card';
@@ -27,11 +29,11 @@ import { Todo, Project, ProjectManager } from './project_manager';
 })();
 
 // TODO: Change default parameter to []
-function generateTabCards(todosToShow = ['a']) {
+function generateTabCards(todosToShow = []) {
   let cards = '';
 
-  todosToShow.forEach((todo) => {
-    cards += generateTodoCard(todo);
+  todosToShow.forEach((todoData) => {
+    cards += generateTodoCard(todoData);
   });
   const cardsContainer = `
     <div class="cardsContainer">${cards}</div>`;
@@ -55,16 +57,30 @@ function generateTabAddTodo() {
 
 // TODO: Extract todos from single function and pass array to generateTabCards
 function generateTodayTabContent() {
-  generateTabCards(ProjectManager.projects[0].getMatchedTodo(0));
+  generateTabCards([ProjectManager.projects[0].getMatchedTodo(0)]);
 }
 
 function generateWeekTabContent() {
-  generateTabCards(ProjectManager.projects[0].getMatchedTodo(1));
+  generateTabCards([ProjectManager.projects[0].getMatchedTodo(1)]);
 }
 
 // Inbox and Projects Tabs
-function generateProjectTabContent() {
-  generateTabCards(ProjectManager.projects[0].getTodos());
+function generateProjectTabContent(projectTitle) {
+  const indexProject = ProjectManager.projects.findIndex((project) =>
+    _.lowerCase(project.title).includes(projectTitle)
+  );
+
+  const project = _.cloneDeep(ProjectManager.projects[indexProject]);
+
+  const matchedTodos = [];
+  const todos = project.getTodos();
+  // TODO: Mira si se puede hacer con un map
+  for (let i = 0; i < todos.length; i++) {
+    const todo = { project_id: indexProject, todo_id: i, todoObject: todos[i] };
+    matchedTodos.push(todo);
+  }
+
+  generateTabCards(matchedTodos);
   generateTabAddTodo();
 }
 
