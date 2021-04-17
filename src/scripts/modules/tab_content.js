@@ -4,6 +4,7 @@ import '../../style/tab_content.css';
 
 import generateTodoCard from './todo_card';
 import { Todo, Project, ProjectManager } from './project_manager';
+import generateTodoHover from './add_todo';
 
 (function createTodosAndProjects() {
   const todos = [
@@ -53,6 +54,10 @@ function generateTabAddTodo() {
   document.body
     .querySelector('.mainContent')
     .insertAdjacentHTML('beforeend', addTodoContainer);
+
+  document.body
+    .querySelector('.addTodo')
+    .addEventListener('click', generateTodoHover);
 }
 
 // TODO: Extract todos from single function and pass array to generateTabCards

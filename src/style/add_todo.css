@@ -1,0 +1,64 @@
+@import 'index.css';
+
+.overlay {
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+}
+
+.addTodoForm {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  /* height: 500px; */
+  background-color: #eeeeee;
+  position: fixed;
+  padding: 20px;
+}
+
+.headerForm {
+  margin: 10px 0;
+  text-align: center;
+  font-size: 34px;
+  color: var(--header-font-color);
+}
+
+.title,
+.description,
+.dueDate,
+.priority,
+.project {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0 18px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  outline: none;
+  background-color: white;
+}
+
+.description {
+  height: 100px;
+  resize: none;
+}
+
+.closeFormButton {
+  width: 100%;
+  background-color: var(--primary-background-color);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+}
+
+.todoLabel {
+  font-size: 16px;
+}
