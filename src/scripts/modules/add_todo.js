@@ -86,7 +86,7 @@ function generateTodoHover() {
 
   document.body
     .querySelector('.mainGrid')
-    .insertAdjacentHTML('beforeend', overlay);
+    .insertAdjacentHTML('afterbegin', overlay);
 }
 
 function removeTodoCardHover() {}

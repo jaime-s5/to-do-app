@@ -17,6 +17,10 @@
   transition: all 0.2s ease-out;
 }
 
+.cardText {
+  white-space: nowrap;
+}
+
 .detailsButton {
   background-color: inherit;
   border: 1px solid var(--primary-background-color);

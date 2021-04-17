@@ -5,7 +5,7 @@ function generateTodoCard(todoData) {
   const todo = { ...todoData.todoObject };
 
   const title = `
-    <h4>${todo.title}</h4>`;
+    <h4 class="cardText">${todo.title}</h4>`;
   const check = `
   <label class="container">
     <input type="checkbox">
@@ -16,7 +16,7 @@ function generateTodoCard(todoData) {
     </div>`;
 
   const detailsButton = `<button class="detailsButton">DETAILS</button>`;
-  const dueDate = `<p>${todo.dueDate}</p>`;
+  const dueDate = `<p  class="cardText">${todo.dueDate}</p>`;
   const edit = `
     <img
       class="editIcon"

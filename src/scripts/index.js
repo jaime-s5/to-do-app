@@ -37,8 +37,24 @@ function switchTabs(event) {
   tab.className += ' active';
 }
 
+// Toggles sideBar when clicked (width screen less than 750px)
+function toggleNavBar() {
+  const sideNavBar = document.querySelector('.sideNavBar');
+
+  if (sideNavBar.className.includes(' hiddenSmallWidth')) {
+    sideNavBar.className = sideNavBar.className.replace(
+      ' hiddenSmallWidth',
+      ''
+    );
+  } else {
+    sideNavBar.className += ' hiddenSmallWidth';
+  }
+}
+
 document
   .querySelectorAll('.tabClicker')
   .forEach((element) => element.addEventListener('click', switchTabs));
 
 document.querySelector('.inbox').click();
+
+document.querySelector('.openNavBar').addEventListener('click', toggleNavBar);
