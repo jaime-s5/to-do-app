@@ -2,7 +2,50 @@ import _ from 'lodash';
 
 import '../../style/add_todo.css';
 
-import { ProjectManager } from './project_manager';
+import { Todo, ProjectManager } from './project_manager';
+
+function removeTodoCardHover(projectTitle) {
+  const title = _.lowerCase(projectTitle);
+  const overlay = document.body.querySelector('.overlay');
+
+  overlay.remove();
+  document.querySelector(`.${title}`).click();
+}
+
+function saveTodo(title, description, dueDate, priority, projectTitle) {
+  const todo = Todo(title, description, dueDate, priority, projectTitle);
+
+  const index = ProjectManager.projects.findIndex(
+    (element) => element.title === projectTitle
+  );
+  const project = ProjectManager.projects[index];
+
+  project.addTodos(todo);
+
+  removeTodoCardHover(projectTitle);
+}
+
+function handleSaveEvent(event) {
+  event.preventDefault();
+
+  // Extract data from form
+  const iterator = new FormData(event.target).entries();
+  const data = [...iterator].map((element) => element);
+  const dataObject = data.reduce((object, element) => {
+    const key = element[0];
+    const value = element[1];
+    object[key] = value;
+    return object;
+  }, {});
+
+  saveTodo(
+    dataObject.title,
+    dataObject.description,
+    dataObject.dueDate,
+    dataObject.priority,
+    _.upperFirst(dataObject.project)
+  );
+}
 
 // Form to add todos that hovers over blurred page
 function generateTodoHover() {
@@ -87,8 +130,10 @@ function generateTodoHover() {
   document.body
     .querySelector('.mainGrid')
     .insertAdjacentHTML('afterbegin', overlay);
-}
 
-function removeTodoCardHover() {}
+  document.body
+    .querySelector('.addTodoForm')
+    .addEventListener('submit', handleSaveEvent);
+}
 
 export default generateTodoHover;

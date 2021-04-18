@@ -13,8 +13,6 @@ function switchTabs(event) {
 
   // Remove tab-content and deselect tab if different tab clicked
   if (tabContent !== null) {
-    if (tab.className.includes('active')) return;
-
     const tabs = document.querySelectorAll('.tabClicker');
     for (let index = 0; index < tabs.length; index++) {
       tabs[index].className = tabs[index].className.replace(' active', '');
