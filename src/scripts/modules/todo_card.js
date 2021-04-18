@@ -1,15 +1,32 @@
+import _ from 'lodash';
+
 import '../../style/todo_card.css';
 
-// TODO: Añadir atributos de datos para index de todo y proyecto
+import { ProjectManager } from './project_manager';
+
+function handleCardEvents(event) {
+  const projectIndex = event.currentTarget.getAttribute('data-project-pos');
+  const todoIndex = event.currentTarget.getAttribute('data-todo-pos');
+
+  if (event.target.className === 'removeIcon') {
+    const project = ProjectManager.projects[projectIndex];
+
+    project.removeTodo(todoIndex);
+
+    const tab = _.lowerCase(project.title);
+    document.querySelector(`.${tab}`).click();
+  }
+}
+
 function generateTodoCard(todoData) {
   const todo = { ...todoData.todoObject };
 
   const title = `
     <h4 class="cardText">${todo.title}</h4>`;
   const check = `
-  <label class="container">
-    <input type="checkbox">
-  </label>`;
+    <label class="container">
+      <input type="checkbox">
+    </label>`;
   const leftDiv = `
     <div class="cardContainer cardContainerLeft">
       ${check}${title}
@@ -28,7 +45,7 @@ function generateTodoCard(todoData) {
       class="removeIcon"
       src="./assets/images/remove.svg"
       alt="Delete todo icon"
-  />`;
+    />`;
   const rightDiv = `
     <div class="cardContainer cardContainerRight">
       ${detailsButton}${dueDate}${edit}${remove}
@@ -45,4 +62,4 @@ function generateTodoCard(todoData) {
   return todoCardDiv;
 }
 
-export default generateTodoCard;
+export { generateTodoCard, handleCardEvents };

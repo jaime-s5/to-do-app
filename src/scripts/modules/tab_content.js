@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import '../../style/tab_content.css';
 
-import generateTodoCard from './todo_card';
+import { generateTodoCard, handleCardEvents } from './todo_card';
 import { Todo, Project, ProjectManager } from './project_manager';
 import generateTodoHover from './add_todo';
 
@@ -29,19 +29,23 @@ import generateTodoHover from './add_todo';
   ProjectManager.addProject(inbox);
 })();
 
-// TODO: Change default parameter to []
 function generateTabCards(todosToShow = []) {
   let cards = '';
 
   todosToShow.forEach((todoData) => {
     cards += generateTodoCard(todoData);
   });
+
   const cardsContainer = `
     <div class="cardsContainer">${cards}</div>`;
 
   document.body
     .querySelector('.mainContent')
     .insertAdjacentHTML('beforeend', cardsContainer);
+
+  document.body
+    .querySelectorAll('.todoCard')
+    .forEach((card) => card.addEventListener('click', handleCardEvents));
 }
 
 function generateTabAddTodo() {
