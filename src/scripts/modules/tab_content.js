@@ -4,21 +4,21 @@ import '../../style/tab_content.css';
 
 import { generateTodoCard, handleCardEvents } from './todo_card';
 import { Todo, Project, ProjectManager } from './project_manager';
-import generateTodoHover from './add_todo';
+import generateTodoHover from './todo';
 
 (function createTodosAndProjects() {
   const todos = [
     Todo(
       'Wash teeth',
       'Some brush to wash your teeth',
-      'Dec 12th',
+      '2021-12-19',
       'Low',
       'Inbox'
     ),
     Todo(
       'Homework',
       'Calculos homework chapter 2',
-      'Dec 29th',
+      '2021-12-19',
       'High',
       'Inbox'
     ),
@@ -61,7 +61,7 @@ function generateTabAddTodo() {
 
   document.body
     .querySelector('.addTodo')
-    .addEventListener('click', generateTodoHover);
+    .addEventListener('click', () => generateTodoHover());
 }
 
 // TODO: Extract todos from single function and pass array to generateTabCards

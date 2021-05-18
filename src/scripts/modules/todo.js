@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import '../../style/add_todo.css';
+import '../../style/todo.css';
 
 import { Todo, ProjectManager } from './project_manager';
 
@@ -25,12 +25,57 @@ function saveTodo(title, description, dueDate, priority, projectTitle) {
   removeTodoCardHover(projectTitle);
 }
 
+function replaceTodo(
+  title,
+  description,
+  dueDate,
+  priority,
+  projectTitle,
+  todoPos,
+  projectPos
+) {
+  const todo = Todo(title, description, dueDate, priority, projectTitle);
+
+  const index = ProjectManager.projects.findIndex(
+    (element) => element.title === projectTitle
+  );
+  const project = ProjectManager.projects[index];
+
+  project.replaceTodo(todoPos, todo);
+
+  removeTodoCardHover(projectTitle);
+}
+
+function handleEditEvent(event, todoPos, projectPos) {
+  event.preventDefault();
+
+  // Extract data from form
+  const iterator = new FormData(event.target).entries();
+  const data = [...iterator];
+  const dataObject = data.reduce((object, element) => {
+    const key = element[0];
+    const value = element[1];
+    object[key] = value;
+    return object;
+  }, {});
+
+  replaceTodo(
+    dataObject.title,
+    dataObject.description,
+    dataObject.dueDate,
+    dataObject.priority,
+    _.upperFirst(dataObject.project),
+    todoPos,
+    projectPos
+  );
+}
+
 function handleSaveEvent(event) {
   event.preventDefault();
 
   // Extract data from form
   const iterator = new FormData(event.target).entries();
-  const data = [...iterator].map((element) => element);
+  const data = [...iterator];
   const dataObject = data.reduce((object, element) => {
     const key = element[0];
     const value = element[1];
@@ -48,17 +93,22 @@ function handleSaveEvent(event) {
 }
 
 // Form to add todos that hovers over blurred page
-function generateTodoHover() {
+function generateTodoHover(todo = {}) {
+  const todoTitle = _.isEmpty(todo) ? '' : todo.title;
+  const todoDescription = _.isEmpty(todo) ? '' : todo.description;
+  const todoDueDate = _.isEmpty(todo) ? '' : todo.dueDate;
+  const todoPriority = _.isEmpty(todo) ? '' : _.lowerFirst(todo.priority);
+
   const header = `<h3 class="headerForm">Add a todo</h3>`;
 
   const title = `
     <label for="title" class="todoLabel">Title:</label>
-    <input
+    <textarea
       type="text"
       class="title text"
       name="title"
       required="required"
-    />
+    />${todoTitle}</textarea>
   `;
 
   const description = `
@@ -68,7 +118,7 @@ function generateTodoHover() {
       class="description text"
       name="description"
       required="required"
-    ></textarea>
+    >${todoDescription}</textarea>
   `;
 
   const dueDate = `
@@ -78,20 +128,28 @@ function generateTodoHover() {
       name="dueDate"
       class="dueDate"
       required="required"
+      value="${todoDueDate}"
     />
   `;
 
   const priority = `
     <label for="priority" class="todoLabel">Priority:</label>
     <select class="priority" name="priority">
-      <option value="low">Low</option>
-      <option value="medium">Medium</option>
-      <option value="high">High</option>
+      <option ${todoPriority === 'low' ? 'selected' : ''} value="low">
+        Low
+      </option>
+      <option ${todoPriority === 'medium' ? 'selected' : ''} value="medium">
+        Medium
+      </option>
+      <option ${todoPriority === 'high' ? 'selected' : ''} value="high">
+        High
+      </option>
     </select>
   `;
 
   const projectOptions = ProjectManager.projects.map((project) => {
     const name = project.title;
+    // TODO: Añadir selected para cuando haya más de un proyecto
 
     return `<option value="${_.lowerFirst(name)}">${name}</option>`;
   });
@@ -103,16 +161,17 @@ function generateTodoHover() {
     </select>
   `;
 
+  const buttonValue = _.isEmpty(todo) ? 'Add todo' : 'Edit todo';
   const button = `
     <input
       type="submit"
-      value="Add todo"
+      value="${buttonValue}"
       class="closeFormButton"
     />
   `;
 
   const form = `
-    <form class="addTodoForm" action="">
+    <form class="todoForm" action="">
       ${header}
       ${title}
       ${description}
@@ -131,9 +190,16 @@ function generateTodoHover() {
     .querySelector('.mainGrid')
     .insertAdjacentHTML('afterbegin', overlay);
 
-  document.body
-    .querySelector('.addTodoForm')
-    .addEventListener('submit', handleSaveEvent);
+  const insertedForm = document.querySelector('.todoForm');
+  if (_.isEmpty(todo)) insertedForm.addEventListener('submit', handleSaveEvent);
+  else {
+    const projectPos = todo.dataProjectPos;
+    const todoPos = todo.dataTodoPos;
+
+    insertedForm.addEventListener('submit', (event) =>
+      handleEditEvent(event, todoPos, projectPos)
+    );
+  }
 }
 
 export default generateTodoHover;

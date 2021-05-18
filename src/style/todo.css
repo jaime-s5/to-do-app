@@ -8,7 +8,7 @@
   position: fixed;
 }
 
-.addTodoForm {
+.todoForm {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -40,6 +40,11 @@
   box-sizing: border-box;
   outline: none;
   background-color: white;
+}
+
+.title {
+  height: 45px;
+  resize: none;
 }
 
 .description {
