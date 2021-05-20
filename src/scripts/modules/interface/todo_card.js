@@ -1,31 +1,4 @@
-import _ from 'lodash';
-
-import '../../style/todo_card.css';
-
-import { ProjectManager } from './project_manager';
-import generateTodoHover from './todo';
-
-function handleCardEvents(event) {
-  const projectIndex = event.currentTarget.getAttribute('data-project-pos');
-  const todoIndex = event.currentTarget.getAttribute('data-todo-pos');
-
-  const project = ProjectManager.projects[projectIndex];
-  const todo = project.getMatchedTodo(todoIndex);
-
-  const elementClass = event.target.className;
-  if (elementClass === 'removeIcon') {
-    project.removeTodo(todoIndex);
-
-    const tab = _.lowerCase(project.title);
-    document.querySelector(`.${tab}`).click();
-  } else if (elementClass === 'editIcon') {
-    todo.dataProjectPos = projectIndex;
-    todo.dataTodoPos = todoIndex;
-    generateTodoHover(todo);
-  }
-}
-
-function generateTodoCard(todoData) {
+function getTodoCardHTML(todoData) {
   const todo = { ...todoData.todoObject };
 
   const title = `
@@ -69,4 +42,4 @@ function generateTodoCard(todoData) {
   return todoCardDiv;
 }
 
-export { generateTodoCard, handleCardEvents };
+export default getTodoCardHTML;

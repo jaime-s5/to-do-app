@@ -2,9 +2,9 @@ import _ from 'lodash';
 
 import '../../style/tab_content.css';
 
-import { generateTodoCard, handleCardEvents } from './todo_card';
+import getTodoCardHTML from './interface/todo_card';
 import { Todo, Project, ProjectManager } from './project_manager';
-import generateTodoHover from './todo';
+import { generateTodoHover, handleCardEvents } from './todo';
 
 (function createTodosAndProjects() {
   const todos = [
@@ -33,7 +33,7 @@ function generateTabCards(todosToShow = []) {
   let cards = '';
 
   todosToShow.forEach((todoData) => {
-    cards += generateTodoCard(todoData);
+    cards += getTodoCardHTML(todoData);
   });
 
   const cardsContainer = `
