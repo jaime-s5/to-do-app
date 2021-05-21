@@ -93,4 +93,48 @@ function getOverlayHTML(todoTitle, todoDescription, todoDueDate, todoPriority) {
   return overlay;
 }
 
-export default getOverlayHTML;
+function getDetailsOverlayHTML(todo) {
+  const title = `<h3 class="headerDetails">${todo.title}</h3>`;
+
+  const project = `
+    <div class="todoPart">
+      <p class="indicator">Project:</p>
+      <p class="text">${todo.project}</p>
+    </div>`;
+
+  const priority = `
+    <div class="todoPart">
+      <p class="indicator">Priority:</p>
+      <p class="text">${todo.priority}</p>
+    </div>`;
+
+  const dueDate = `
+    <div class="todoPart">
+      <p class="indicator">Due Date:</p>
+      <p class="text">${todo.dueDate}</p>
+    </div>`;
+
+  const description = `
+    <div class="todoPart">
+      <p class="indicator">Description:</p>
+      <p class="text">${todo.description}</p>
+    </div>`;
+
+  const details = `
+    <div class="detailsDiv">
+      ${title}
+      ${project}
+      ${priority}
+      ${dueDate}
+      ${description}
+    </div>
+  `;
+
+  const overlay = `
+    <div class="overlay">${details}</div>
+  `;
+
+  return overlay;
+}
+
+export { getOverlayHTML, getDetailsOverlayHTML };

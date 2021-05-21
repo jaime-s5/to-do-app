@@ -3,7 +3,7 @@ import _ from 'lodash';
 import '../../style/todo.css';
 
 import { Todo, ProjectManager } from './project_manager';
-import getOverlayHTML from './interface/overlay';
+import { getOverlayHTML, getDetailsOverlayHTML } from './interface/overlay';
 
 function removeTodoCardHover(projectTitle) {
   const title = _.lowerCase(projectTitle);
@@ -97,6 +97,15 @@ function generateTodoHover(todo = {}) {
   );
 }
 
+// Displays Hover with details of todo
+function generateDetailsHover(todo) {
+  const detailsOverlay = getDetailsOverlayHTML(todo);
+
+  document.body
+    .querySelector('.mainGrid')
+    .insertAdjacentHTML('afterbegin', detailsOverlay);
+}
+
 function handleCardEvents(event) {
   const projectIndex = event.currentTarget.getAttribute('data-project-pos');
   const todoIndex = event.currentTarget.getAttribute('data-todo-pos');
@@ -114,6 +123,8 @@ function handleCardEvents(event) {
     todo.dataProjectPos = projectIndex;
     todo.dataTodoPos = todoIndex;
     generateTodoHover(todo);
+  } else if (elementClass === 'detailsButton') {
+    generateDetailsHover(todo);
   }
 }
 

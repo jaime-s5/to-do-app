@@ -10,7 +10,7 @@ import { generateTodoHover, handleCardEvents } from './todo';
   const todos = [
     Todo(
       'Wash teeth',
-      'Some brush to wash your teeth',
+      'Some brush to wash your teeth, bought for 23.99$ at the Lidl Supermarket',
       '2021-12-19',
       'Low',
       'Inbox'

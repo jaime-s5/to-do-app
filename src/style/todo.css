@@ -13,7 +13,6 @@
   top: 50%;
   transform: translate(-50%, -50%);
   width: 350px;
-  /* height: 500px; */
   background-color: #eeeeee;
   position: fixed;
   padding: 20px;
@@ -125,4 +124,37 @@
 
 .cardContainerRight > * {
   margin: 2px 15px;
+}
+
+.headerDetails {
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 34px;
+  color: var(--header-font-color);
+}
+
+.detailsDiv {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  background-color: #eeeeee;
+  position: fixed;
+  padding: 20px;
+}
+
+.indicator {
+  flex: 0 0 120px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.text {
+  padding-top: 2px;
+  font-size: 17px;
+}
+
+.todoPart {
+  display: flex;
+  min-height: 20px;
 }
