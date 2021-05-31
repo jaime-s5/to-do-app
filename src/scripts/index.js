@@ -5,6 +5,9 @@ import {
   generateTodayTabContent,
   generateWeekTabContent,
 } from './modules/tab_content';
+import generateProjectTabs from './modules/project_tabs';
+
+generateProjectTabs();
 
 // Remove and render content on tab clicking
 function switchTabs(event) {

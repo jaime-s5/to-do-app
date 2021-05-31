@@ -16,9 +16,8 @@ function removeTodoCardHover(projectTitle) {
 function saveTodo({ title, description, dueDate, priority, projectTitle }) {
   const todo = Todo(title, description, dueDate, priority, projectTitle);
 
-  const index = ProjectManager.projects.findIndex(
-    (element) => element.title === projectTitle
-  );
+  const index = ProjectManager.findProject(projectTitle);
+
   const project = ProjectManager.projects[index];
 
   project.addTodos(todo);

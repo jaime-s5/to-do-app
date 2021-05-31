@@ -72,6 +72,7 @@
   border-radius: 3px;
   padding: 2px 0;
   cursor: pointer;
+  height: 24px;
 }
 
 .tab:hover,
@@ -81,6 +82,12 @@
 
 .iconTab {
   margin: 0 10px 0 5px;
+}
+
+.iconProject {
+  width: 16px;
+  height: 16px;
+  padding-left: 4px;
 }
 
 .sideNavBarProjects {

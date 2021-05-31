@@ -58,11 +58,17 @@ const ProjectManager = (function () {
     return _.cloneDeep(projects);
   }
 
+  function findProject(title) {
+    const match = projects.findIndex((project) => project.title === title);
+    return match;
+  }
+
   const proto = Object.create({
     addProject,
     removeProject,
     retrieveData,
     cloneData,
+    findProject,
   });
 
   return Object.assign(proto, { projects });

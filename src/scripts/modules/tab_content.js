@@ -22,11 +22,26 @@ import { generateTodoHover, handleCardEvents } from './todo';
       'High',
       'Inbox'
     ),
+    Todo(
+      'Homework',
+      'Algebra homework chapter',
+      '2021-12-19',
+      'High',
+      'Homework'
+    ),
   ];
 
-  const inbox = Project('Inbox');
-  inbox.addTodos(...todos);
-  ProjectManager.addProject(inbox);
+  todos.forEach((todo) => {
+    const match = ProjectManager.findProject(todo.project);
+    if (match === -1) {
+      const project = Project(todo.project);
+      project.addTodos(todo);
+      ProjectManager.addProject(project);
+    } else {
+      const project = ProjectManager.projects[match];
+      project.addTodos(todo);
+    }
+  });
 })();
 
 function generateTabCards(todosToShow = []) {
@@ -75,9 +90,7 @@ function generateWeekTabContent() {
 
 // Inbox and Projects Tabs
 function generateProjectTabContent(projectTitle) {
-  const indexProject = ProjectManager.projects.findIndex((project) =>
-    _.lowerCase(project.title).includes(projectTitle)
-  );
+  const indexProject = ProjectManager.findProject(_.upperFirst(projectTitle));
 
   const project = _.cloneDeep(ProjectManager.projects[indexProject]);
 
