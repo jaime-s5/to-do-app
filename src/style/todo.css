@@ -51,9 +51,9 @@
   resize: none;
 }
 
-.closeFormButton {
-  width: 100%;
-  background-color: var(--primary-background-color);
+.button {
+  display: inline-block;
+  width: 49%;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -61,6 +61,14 @@
   border-radius: 4px;
   cursor: pointer;
   outline: none;
+}
+
+.submitForm {
+  background-color: var(--primary-background-color);
+}
+
+.closeForm {
+  background-color: #aaaaaa;
 }
 
 .todoLabel {

@@ -100,12 +100,20 @@ function getOverlayHTML(
 
   const project = getProjectHTML(todoProject);
 
+  const buttonClose = `
+    <input
+      type="button"
+      value=Close
+      class="closeForm button"
+    />
+  `;
+
   const buttonValue = todoTitle === '' ? 'Add todo' : 'Edit todo';
-  const button = `
+  const buttonSubmit = `
     <input
       type="submit"
       value="${buttonValue}"
-      class="closeFormButton"
+      class="submitForm button"
     />
   `;
 
@@ -117,7 +125,8 @@ function getOverlayHTML(
       ${dueDate}
       ${priority}
       ${project}
-      ${button}
+      ${buttonClose}
+      ${buttonSubmit}
     </form>
   `;
 

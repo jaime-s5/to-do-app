@@ -111,6 +111,12 @@ function generateTodoHover(todo = {}) {
     handleSubmitEvent(event, todoPos, projectPos)
   );
 
+  document
+    .querySelector('.closeForm')
+    .addEventListener('click', () =>
+      document.querySelector('.overlay').remove()
+    );
+
   addOverlayEvents();
 }
 
