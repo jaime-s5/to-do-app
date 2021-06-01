@@ -68,6 +68,20 @@ function handleSubmitEvent(event, todoPos, projectPos) {
   }
 }
 
+function addOverlayEvents() {
+  const overlay = document.querySelector('.overlay');
+
+  overlay.focus();
+
+  overlay.addEventListener('click', (event) => {
+    if (event.target.className === 'overlay') overlay.remove();
+  });
+
+  overlay.addEventListener('keydown', (event) => {
+    if (event.keyCode === 27) overlay.remove();
+  });
+}
+
 // Form to add or edit todos that hovers over blurred page
 function generateTodoHover(todo = {}) {
   const todoTitle = _.isEmpty(todo) ? '' : todo.title;
@@ -96,6 +110,8 @@ function generateTodoHover(todo = {}) {
   insertedForm.addEventListener('submit', (event) =>
     handleSubmitEvent(event, todoPos, projectPos)
   );
+
+  addOverlayEvents();
 }
 
 // Displays Hover with details of todo
@@ -105,6 +121,8 @@ function generateDetailsHover(todo) {
   document.body
     .querySelector('.mainGrid')
     .insertAdjacentHTML('afterbegin', detailsOverlay);
+
+  addOverlayEvents();
 }
 
 function handleCardEvents(event) {

@@ -122,7 +122,7 @@ function getOverlayHTML(
   `;
 
   const overlay = `
-    <div class="overlay">${form}</div>
+    <div tabindex="-1" class="overlay">${form}</div>
   `;
 
   return overlay;
@@ -166,7 +166,7 @@ function getDetailsOverlayHTML(todo) {
   `;
 
   const overlay = `
-    <div class="overlay">${details}</div>
+    <div tabindex="-1" class="overlay">${details}</div>
   `;
 
   return overlay;
