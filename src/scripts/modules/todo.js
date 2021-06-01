@@ -74,12 +74,14 @@ function generateTodoHover(todo = {}) {
   const todoDescription = _.isEmpty(todo) ? '' : todo.description;
   const todoDueDate = _.isEmpty(todo) ? '' : todo.dueDate;
   const todoPriority = _.isEmpty(todo) ? '' : _.lowerFirst(todo.priority);
+  const todoProject = _.isEmpty(todo) ? '' : todo.project;
 
   const overlay = getOverlayHTML(
     todoTitle,
     todoDescription,
     todoDueDate,
-    todoPriority
+    todoPriority,
+    todoProject
   );
 
   document.body

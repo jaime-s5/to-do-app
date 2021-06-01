@@ -2,68 +2,103 @@ import _ from 'lodash';
 
 import { ProjectManager } from '../project_manager';
 
-function getOverlayHTML(todoTitle, todoDescription, todoDueDate, todoPriority) {
-  const header = `<h3 class="headerForm">Add a todo</h3>`;
+const getTitleHTML = (title) => `
+  <label for="title" class="todoLabel">Title:</label>
+  <textarea
+    type="text"
+    class="title text"
+    name="title"
+    required="required"
+  />${title}</textarea>`;
 
-  const title = `
-    <label for="title" class="todoLabel">Title:</label>
-    <textarea
-      type="text"
-      class="title text"
-      name="title"
-      required="required"
-    />${todoTitle}</textarea>
-  `;
+const getDescriptionHTML = (description) => `
+  <label for="description" class="todoLabel">Description:</label>
+  <textarea
+    type="text"
+    class="description text"
+    name="description"
+    required="required"
+  >${description}</textarea>`;
 
-  const description = `
-    <label for="description" class="todoLabel">Description:</label>
-    <textarea
-      type="text"
-      class="description text"
-      name="description"
-      required="required"
-    >${todoDescription}</textarea>
-  `;
+const getDueDateHTML = (dueDate) => `
+  <label for="dueDate" class="todoLabel">Due Date:</label>
+  <input
+    type="date"
+    name="dueDate"
+    class="dueDate"
+    required="required"
+    value="${dueDate}"
+  />`;
 
-  const dueDate = `
-    <label for="dueDate" class="todoLabel">Due Date:</label>
-    <input
-      type="date"
-      name="dueDate"
-      class="dueDate"
-      required="required"
-      value="${todoDueDate}"
-    />
-  `;
+const getPriorityHTML = (priority) => `
+  <label for="priority" class="todoLabel">Priority:</label>
+  <select class="priority" name="priority">
+    <option ${priority === 'low' ? 'selected' : ''} value="low">
+      Low
+    </option>
+    <option ${priority === 'medium' ? 'selected' : ''} value="medium">
+      Medium
+    </option>
+    <option ${priority === 'high' ? 'selected' : ''} value="high">
+      High
+    </option>
+  </select>`;
 
-  const priority = `
-    <label for="priority" class="todoLabel">Priority:</label>
-    <select class="priority" name="priority">
-      <option ${todoPriority === 'low' ? 'selected' : ''} value="low">
-        Low
-      </option>
-      <option ${todoPriority === 'medium' ? 'selected' : ''} value="medium">
-        Medium
-      </option>
-      <option ${todoPriority === 'high' ? 'selected' : ''} value="high">
-        High
-      </option>
-    </select>
-  `;
+// Selects the correct project according to the clicked tab
+function getMatchProjectTabClicked(name) {
+  const activeTab = document.querySelector('.active');
 
+  const projectTitles = ProjectManager.projects.map((element) =>
+    _.lowerFirst(element.title)
+  );
+
+  const projectIndex = projectTitles.findIndex((element) =>
+    activeTab.className.includes(element)
+  );
+
+  const projectTitle = _.upperFirst(projectTitles[projectIndex]);
+
+  return projectTitle === name ? 'selected' : '';
+}
+
+const getProjectHTML = (todoProject) => {
   const projectOptions = ProjectManager.projects.map((project) => {
     const name = project.title;
-    // TODO: Añadir selected para cuando haya más de un proyecto
+    let selected = '';
 
-    return `<option value="${_.lowerFirst(name)}">${name}</option>`;
+    // If add todo is clicked, the project selected is the tab clicked
+    // else, extracted from the edited todo
+    if (todoProject === '') selected = getMatchProjectTabClicked(name);
+    else selected = todoProject === name ? 'selected' : '';
+
+    return `<option ${selected} value="${_.lowerFirst(name)}">${name}</option>`;
   });
 
-  const project = `
+  return `
     <label for="project" class="todoLabel">Project:</label>
     <select class="project" name="project">
       ${projectOptions}
-    </select>
-  `;
+    </select>`;
+};
+
+function getOverlayHTML(
+  todoTitle,
+  todoDescription,
+  todoDueDate,
+  todoPriority,
+  todoProject
+) {
+  const header = `<h3 class="headerForm">Add a todo</h3>`;
+
+  const title = getTitleHTML(todoTitle);
+
+  const description = getDescriptionHTML(todoDescription);
+
+  const dueDate = getDueDateHTML(todoDueDate);
+
+  const priority = getPriorityHTML(todoPriority);
+
+  const project = getProjectHTML(todoProject);
 
   const buttonValue = todoTitle === '' ? 'Add todo' : 'Edit todo';
   const button = `
