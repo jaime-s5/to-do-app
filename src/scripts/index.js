@@ -1,11 +1,15 @@
 import '../style/reset.css';
 import '../style/index.css';
+
+import _ from 'lodash';
+
 import {
   generateProjectTabContent,
   generateTodayTabContent,
   generateWeekTabContent,
 } from './modules/tab_content';
 import generateProjectTabs from './modules/project_tabs';
+import { ProjectManager } from './modules/project_manager';
 
 generateProjectTabs();
 
@@ -26,9 +30,17 @@ function switchTabs(event) {
     }
   }
 
+  const projectTitles = ProjectManager.projects.map((project) =>
+    _.lowerFirst(project.title)
+  );
+
+  const projectIndex = projectTitles.findIndex((title) =>
+    tab.className.includes(title)
+  );
+
   // Render content and make tab active
-  if (tab.className.includes('inbox')) {
-    generateProjectTabContent('inbox');
+  if (projectIndex !== -1) {
+    generateProjectTabContent(projectTitles[projectIndex]);
   } else if (tab.className.includes('today')) {
     generateTodayTabContent();
   } else if (tab.className.includes('week')) {
