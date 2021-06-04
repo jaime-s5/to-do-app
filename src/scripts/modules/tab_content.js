@@ -92,6 +92,9 @@ function generateWeekTabContent() {
 function generateProjectTabContent(projectTitle) {
   const indexProject = ProjectManager.findProject(_.upperFirst(projectTitle));
 
+  // If empty project, we exit
+  if (indexProject === -1) return;
+
   const project = _.cloneDeep(ProjectManager.projects[indexProject]);
 
   const matchedTodos = [];

@@ -59,7 +59,11 @@ const ProjectManager = (function () {
   }
 
   function findProject(title) {
-    const match = projects.findIndex((project) => project.title === title);
+    const lowerTitle = _.lowerCase(title).split(' ').join('');
+
+    const match = projects.findIndex(
+      (project) => _.lowerFirst(project.title) === lowerTitle
+    );
     return match;
   }
 

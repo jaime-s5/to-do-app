@@ -8,7 +8,8 @@
   position: fixed;
 }
 
-.todoForm {
+.todoForm,
+.projectForm {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);

@@ -181,4 +181,48 @@ function getDetailsOverlayHTML(todo) {
   return overlay;
 }
 
-export { getOverlayHTML, getDetailsOverlayHTML };
+function getProjectOverlayHTML() {
+  const header = `<h3 class="headerForm">Add a project</h3>`;
+
+  const project = `
+    <label for="title" class="projectLabel">Title:</label>
+    <textarea
+      type="text"
+      class="title text"
+      name="title"
+      required="required"
+    /></textarea>`;
+
+  const buttonClose = `
+    <input
+      type="button"
+      value=Close
+      class="closeForm button"
+    />
+  `;
+
+  const buttonSubmit = `
+    <input
+      type="submit"
+      value="Add project"
+      class="submitForm button"
+    />
+  `;
+
+  const details = `
+    <form class="projectForm">
+      ${header}
+      ${project}
+      ${buttonClose}
+      ${buttonSubmit}
+    </form>
+  `;
+
+  const overlay = `
+    <div tabindex="-1" class="overlay">${details}</div>
+  `;
+
+  return overlay;
+}
+
+export { getOverlayHTML, getDetailsOverlayHTML, getProjectOverlayHTML };
