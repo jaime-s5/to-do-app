@@ -1,7 +1,5 @@
 import _ from 'lodash';
 
-import '../../style/tab_content.css';
-
 import getTodoCardHTML from './interface/todo_card';
 import { Todo, Project, ProjectManager } from './project_manager';
 import { generateTodoHover, handleCardEvents } from './todo';

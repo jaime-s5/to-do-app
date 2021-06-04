@@ -1,7 +1,5 @@
 import _ from 'lodash';
 
-import '../../style/todo.css';
-
 import { Todo, ProjectManager } from './project_manager';
 import { getOverlayHTML, getDetailsOverlayHTML } from './interface/overlay';
 import { getDataObject, addOverlayEvents } from './form';
