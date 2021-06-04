@@ -77,7 +77,7 @@ const getProjectHTML = (todoProject) => {
   return `
     <label for="project" class="todoLabel">Project:</label>
     <select class="project" name="project">
-      ${projectOptions}
+      ${projectOptions.join('')}
     </select>`;
 };
 

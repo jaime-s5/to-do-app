@@ -31,9 +31,17 @@ function replaceTodo(
 ) {
   const todo = Todo(title, description, dueDate, priority, projectTitle);
 
-  const project = ProjectManager.projects[projectPos];
+  const projectNewPos = ProjectManager.findProject(projectTitle);
+  const currentProject = ProjectManager.projects[projectPos];
 
-  project.replaceTodo(todoPos, todo);
+  if (projectNewPos === parseInt(projectPos)) {
+    currentProject.replaceTodo(todoPos, todo);
+  } else {
+    const newProject = ProjectManager.projects[projectNewPos];
+
+    currentProject.removeTodo(todoPos);
+    newProject.addTodos(todo);
+  }
 
   removeTodoCardHover(projectTitle);
 }
