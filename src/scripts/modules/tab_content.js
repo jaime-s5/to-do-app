@@ -25,7 +25,7 @@ import { generateTodoHover, handleCardEvents } from './todo';
       'Homework',
       'Algebra homework chapter',
       '2021-06-05',
-      'High',
+      'Medium',
       'Homework'
     ),
   ];

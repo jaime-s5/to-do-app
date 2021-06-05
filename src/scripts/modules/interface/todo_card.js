@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 function getTodoCardHTML(todoData) {
   const todo = { ...todoData.todoObject };
 
@@ -34,8 +36,9 @@ function getTodoCardHTML(todoData) {
   const dataAttributeProject = `data-project-pos=${todoData.project_id}`;
   const dataAttributeTodo = `data-todo-pos=${todoData.todo_id}`;
 
+  const priority = _.lowerFirst(todo.priority);
   const todoCardDiv = `
-    <div class="todoCard" ${dataAttributeProject} ${dataAttributeTodo}>
+    <div class="todoCard ${priority}" ${dataAttributeProject} ${dataAttributeTodo}>
     ${leftDiv}${rightDiv}
     </div>`;
 

@@ -236,6 +236,7 @@
   cursor: pointer;
   background-color: var(--sidebar-background-color);
   height: 40px;
+  margin: 12px 0;
 }
 
 .todoCard:hover {
@@ -315,4 +316,16 @@
 .todoPart {
   display: flex;
   min-height: 20px;
+}
+
+.low {
+  border-left: 4px solid green;
+}
+
+.medium {
+  border-left: 4px solid orange;
+}
+
+.high {
+  border-left: 4px solid red;
 }

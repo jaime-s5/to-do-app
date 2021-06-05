@@ -7,7 +7,6 @@ import {
 } from './modules/project_tabs';
 import { switchDefaultTabs } from './modules/switch_tabs';
 
-// TODO: Añadir color prioridad
 generateProjectTabs();
 generateAddProjectEvent();
 
