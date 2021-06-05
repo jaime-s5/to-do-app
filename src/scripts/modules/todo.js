@@ -118,11 +118,11 @@ function handleCardEvents(event) {
   const todo = project.getMatchedTodo(todoIndex);
 
   const elementClass = event.target.className;
-  if (elementClass === 'removeIcon') {
+  if (elementClass === 'removeIcon' || elementClass === 'clickDone') {
     project.removeTodo(todoIndex);
 
-    const tab = _.lowerCase(project.title);
-    document.querySelector(`.${tab}`).click();
+    const tab = document.querySelector('.active');
+    tab.click();
   } else if (elementClass === 'editIcon') {
     todo.dataProjectPos = projectIndex;
     todo.dataTodoPos = todoIndex;

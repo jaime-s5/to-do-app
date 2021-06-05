@@ -5,7 +5,7 @@ function getTodoCardHTML(todoData) {
     <h4 class="cardText">${todo.title}</h4>`;
   const check = `
     <label class="container">
-      <input type="checkbox">
+      <input class="clickDone" type="checkbox">
     </label>`;
   const leftDiv = `
     <div class="cardContainer cardContainerLeft">
