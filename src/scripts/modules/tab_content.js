@@ -80,7 +80,7 @@ function generateTabAddTodo() {
 
 // Checks for matched TODOs according the checker callback
 // (isToday, isThisWeek)
-function matchTodosDate(isMatch) {
+function matchTodosDate(isMatch, opts = {}) {
   const projects = _.cloneDeep(ProjectManager.projects);
   const matchedTodos = [];
 
@@ -88,7 +88,10 @@ function matchTodosDate(isMatch) {
     const todos = projects[i].getTodos();
     for (let j = 0; j < todos.length; j++) {
       const dueDate = parseISO(todos[j].dueDate);
-      if (isMatch(dueDate)) {
+      const match = _.isElement(opts)
+        ? isMatch(dueDate)
+        : isMatch(dueDate, opts);
+      if (match) {
         const todo = { project_id: i, todo_id: j, todoObject: todos[j] };
         matchedTodos.push(todo);
       }
@@ -106,7 +109,7 @@ function generateTodayTabContent() {
 }
 // Display todos which dueDate is this week
 function generateWeekTabContent() {
-  const matchedTodos = matchTodosDate(isThisWeek);
+  const matchedTodos = matchTodosDate(isThisWeek, { weekStartsOn: 1 });
 
   generateTabCards(matchedTodos);
 }
