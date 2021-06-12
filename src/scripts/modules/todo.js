@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { Todo, ProjectManager } from './project_manager';
 import { getOverlayHTML, getDetailsOverlayHTML } from './interface/overlay';
 import { getDataObject, addOverlayEvents } from './form';
+import { PersistentStorage } from './storage';
 
 function removeTodoCardHover(projectTitle) {
   const title = _.lowerCase(projectTitle);
@@ -20,6 +21,7 @@ function saveTodo({ title, description, dueDate, priority, projectTitle }) {
   const project = ProjectManager.projects[index];
 
   project.addTodos(todo);
+  PersistentStorage.storeTodo(todo, index);
 
   removeTodoCardHover(projectTitle);
 }
@@ -36,11 +38,15 @@ function replaceTodo(
 
   if (projectNewPos === parseInt(projectPos)) {
     currentProject.replaceTodo(todoPos, todo);
+    PersistentStorage.storeTodo(todo, parseInt(projectPos), parseInt(todoPos));
   } else {
     const newProject = ProjectManager.projects[projectNewPos];
 
     currentProject.removeTodo(todoPos);
+    PersistentStorage.deleteTodo(parseInt(projectPos), parseInt(todoPos));
+
     newProject.addTodos(todo);
+    PersistentStorage.storeTodo(todo, projectNewPos);
   }
 
   removeTodoCardHover(projectTitle);
@@ -120,9 +126,9 @@ function handleCardEvents(event) {
   const elementClass = event.target.className;
   if (elementClass === 'removeIcon' || elementClass === 'clickDone') {
     project.removeTodo(todoIndex);
+    PersistentStorage.deleteTodo(parseInt(projectIndex), parseInt(todoIndex));
 
-    const tab = document.querySelector('.active');
-    tab.click();
+    document.querySelector('.active').click();
   } else if (elementClass === 'editIcon') {
     todo.dataProjectPos = projectIndex;
     todo.dataTodoPos = todoIndex;

@@ -6,7 +6,9 @@ import {
   generateAddProjectEvent,
 } from './modules/project_tabs';
 import { switchDefaultTabs } from './modules/switch_tabs';
+import { createTodosAndProjects } from './modules/storage';
 
+createTodosAndProjects();
 generateProjectTabs();
 generateAddProjectEvent();
 

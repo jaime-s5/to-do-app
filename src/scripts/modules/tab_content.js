@@ -2,46 +2,8 @@ import _ from 'lodash';
 import { isToday, isThisWeek, parseISO } from 'date-fns';
 
 import getTodoCardHTML from './interface/todo_card';
-import { Todo, Project, ProjectManager } from './project_manager';
+import { ProjectManager } from './project_manager';
 import { generateTodoHover, handleCardEvents } from './todo';
-
-(function createTodosAndProjects() {
-  const todos = [
-    Todo(
-      'Wash teeth',
-      'Some brush to wash your teeth, bought for 23.99$ at the Lidl Supermarket',
-      '2021-06-05',
-      'Low',
-      'Inbox'
-    ),
-    Todo(
-      'Homework',
-      'Calculos homework chapter 2',
-      '2021-06-06',
-      'High',
-      'Inbox'
-    ),
-    Todo(
-      'Homework',
-      'Algebra homework chapter',
-      '2021-06-05',
-      'Medium',
-      'Homework'
-    ),
-  ];
-
-  todos.forEach((todo) => {
-    const match = ProjectManager.findProject(todo.project);
-    if (match === -1) {
-      const project = Project(todo.project);
-      project.addTodos(todo);
-      ProjectManager.addProject(project);
-    } else {
-      const project = ProjectManager.projects[match];
-      project.addTodos(todo);
-    }
-  });
-})();
 
 function generateTabCards(todosToShow = []) {
   let cards = '';
