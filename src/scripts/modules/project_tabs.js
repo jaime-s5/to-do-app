@@ -4,6 +4,7 @@ import { getProjectOverlayHTML } from './interface/overlay';
 import { ProjectManager, Project } from './project_manager';
 import { getDataObject, addOverlayEvents } from './form';
 import { switchProjectTabs } from './switch_tabs';
+import { PersistentStorage } from './storage';
 
 function generateProjectTabs() {
   const projects = ProjectManager.projects
@@ -65,7 +66,7 @@ function saveProject(title) {
   const project = Project(title);
 
   ProjectManager.addProject(project);
-
+  PersistentStorage.addProject(title);
   removeProjectCardHover(title);
 }
 

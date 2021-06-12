@@ -51,9 +51,14 @@ const PersistentStorage = (function () {
     localStorage.setItem(`proj${projectPos}Todos`, todos - 1);
   }
 
-  function addProject(title, pos) {
-    localStorage.setItem(`proj${pos}Title`, title);
-    localStorage.setItem('numberProjects', pos + 1);
+  function addProject(title) {
+    const projects =
+      'numberProjects' in localStorage
+        ? parseInt(localStorage.getItem('numberProjects'))
+        : 0;
+
+    localStorage.setItem(`proj${projects}Title`, title);
+    localStorage.setItem('numberProjects', projects + 1);
   }
 
   function restoreProjects() {
