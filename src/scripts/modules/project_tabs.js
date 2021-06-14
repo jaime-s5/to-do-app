@@ -11,8 +11,10 @@ function tabClickEvent(event) {
     const tab = event.currentTarget;
     const project = _.upperFirst(tab.className.split(' ')[0]);
     const index = ProjectManager.findProject(project);
+
     ProjectManager.removeProject(index);
     PersistentStorage.removeProject(index);
+
     tab.remove();
   } else {
     switchProjectTabs(event);

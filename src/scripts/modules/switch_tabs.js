@@ -6,8 +6,6 @@ import {
   generateWeekTabContent,
 } from './tab_content';
 
-import { ProjectManager } from './project_manager';
-
 function toggleContent() {
   const tabContent = document.querySelector('.mainContent');
 
@@ -46,18 +44,11 @@ function switchDefaultTabs(event) {
 function switchProjectTabs(event) {
   toggleContent();
 
-  const projectTitles = ProjectManager.projects.map((project) =>
-    _.lowerFirst(project.title)
-  );
-
   const tab = event.currentTarget;
-
-  const projectIndex = projectTitles.findIndex((title) =>
-    tab.className.includes(title)
-  );
+  const project = _.upperFirst(tab.className.split(' ')[0]);
 
   // Render content and make tab active
-  generateProjectTabContent(projectTitles[projectIndex]);
+  generateProjectTabContent(project);
 
   tab.className += ' active';
 }
