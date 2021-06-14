@@ -15,6 +15,12 @@ function tabClickEvent(event) {
     ProjectManager.removeProject(index);
     PersistentStorage.removeProject(index);
 
+    const selectedTab = _.upperFirst(
+      document.querySelector('.active').className.split(' ')[0]
+    );
+
+    if (project === selectedTab) document.querySelector('.inbox').click();
+
     tab.remove();
   } else {
     switchProjectTabs(event);
@@ -101,9 +107,12 @@ function handleSubmitEvent(event) {
 function checkFieldInput(event) {
   const title = event.target.value;
   const match = ProjectManager.findProject(title);
+  const startWithNumber = !!title.substring(0, 1).match(/[0-9]/);
 
   if (title === '') {
     event.target.setCustomValidity('Field is Empty');
+  } else if (startWithNumber) {
+    event.target.setCustomValidity("Can't start with a number");
   } else if (match !== -1) {
     event.target.setCustomValidity('Project Already exists');
   } else {
