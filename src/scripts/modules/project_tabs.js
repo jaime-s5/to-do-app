@@ -6,6 +6,19 @@ import { getDataObject, addOverlayEvents } from './form';
 import { switchProjectTabs } from './switch_tabs';
 import { PersistentStorage } from './storage';
 
+function tabClickEvent(event) {
+  if (event.target.className === 'removeIconProject') {
+    const tab = event.currentTarget;
+    const project = _.upperFirst(tab.className.split(' ')[0]);
+    const index = ProjectManager.findProject(project);
+    ProjectManager.removeProject(index);
+    PersistentStorage.removeProject(index);
+    tab.remove();
+  } else {
+    switchProjectTabs(event);
+  }
+}
+
 function generateProjectTabs() {
   const projects = ProjectManager.projects
     .map((project, index) => ({
@@ -26,6 +39,9 @@ function generateProjectTabs() {
           class="${lowerTitle}Icon iconTab iconProject"
         >
         <p class="${lowerTitle}Description">${capitalTitle}</p>
+        <div class="removeProject">
+          <span class="removeIconProject">✗</span>
+        </div>
       </div>`;
   });
 
@@ -37,7 +53,7 @@ function generateProjectTabs() {
 
   document
     .querySelectorAll('.projectsContainer > .tabClicker')
-    .forEach((element) => element.addEventListener('click', switchProjectTabs));
+    .forEach((element) => element.addEventListener('click', tabClickEvent));
 }
 
 function removeProjectTabs() {

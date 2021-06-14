@@ -6,11 +6,10 @@ const PersistentStorage = (function () {
   const todoKeys = Todo();
 
   function storeTodo(todo, projectPos, todoPos = -1) {
-    // Get number of todos stored, if none, set it to 0
-    const todosStored =
-      `proj${projectPos}Todos` in localStorage
-        ? parseInt(localStorage.getItem(`proj${projectPos}Todos`))
-        : 0;
+    // Get number of todos stored
+    const todosStored = parseInt(
+      localStorage.getItem(`proj${projectPos}Todos`)
+    );
 
     let todoPosition;
     let numberTodos;
@@ -57,8 +56,36 @@ const PersistentStorage = (function () {
         ? parseInt(localStorage.getItem('numberProjects'))
         : 0;
 
+    localStorage.setItem(`proj${projects}Todos`, 0);
     localStorage.setItem(`proj${projects}Title`, title);
     localStorage.setItem('numberProjects', projects + 1);
+  }
+
+  function removeProject(projectPos) {
+    // Delete all todos associated with project projectPos
+    const todos = localStorage.getItem(`proj${projectPos}Todos`);
+    for (let i = 0; i < todos; i++) {
+      deleteTodo(projectPos, i);
+    }
+
+    // Delete current projectPos title and number of todos
+    const oldNumberProjects = parseInt(localStorage.getItem('numberProjects'));
+    localStorage.removeItem(`proj${projectPos}Title`);
+    localStorage.removeItem(`proj${projectPos}Todos`);
+
+    // Displace one position down titles and number of todos
+    for (let i = projectPos + 1; i < oldNumberProjects; i++) {
+      const currentTitle = localStorage.getItem(`proj${i}Title`);
+      const currentTodos = localStorage.getItem(`proj${i}Todos`);
+
+      localStorage.setItem(`proj${i - 1}Title`, currentTitle);
+      localStorage.setItem(`proj${i - 1}Todos`, currentTodos);
+
+      localStorage.removeItem(`proj${i}Title`);
+      localStorage.removeItem(`proj${i}Todos`);
+    }
+
+    localStorage.setItem('numberProjects', oldNumberProjects - 1);
   }
 
   function restoreProjects() {
@@ -100,6 +127,7 @@ const PersistentStorage = (function () {
     addProject,
     restoreProjects,
     restoreTodos,
+    removeProject,
   });
 
   return Object.assign(proto);

@@ -47,7 +47,7 @@ const ProjectManager = (function () {
   }
 
   function removeProject(index) {
-    projects.slice(index, 1);
+    projects.splice(index, 1);
   }
 
   function retrieveData(data) {
