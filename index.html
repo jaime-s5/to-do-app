@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap"
+      rel="stylesheet"
+    />
+    <title>To-Do App</title>
+  <script defer src="bundle.js"></script><link href="main.css" rel="stylesheet"></head>
+  <body>
+    <div class="mainGrid">
+      <div class="topBar">
+        <div class="topBarInner">
+          <img
+            class="topBarIcon"
+            src="./assets/images/icon.png"
+            alt="Application icon"
+          />
+          <h1 class="topBarTitle">Todo List</h1>
+        </div>
+        <span class="openNavBar">&#9776;</span>
+      </div>
+      <div class="sideNavBar hiddenSmallWidth">
+        <div class="sideNavBarTabs">
+          <div class="inbox tab tabClicker">
+            <img
+              src="./assets/images/inbox_icon.svg"
+              alt="Inbox Icon"
+              class="inboxIcon iconTab"
+            />
+            <p class="inboxDescription">Inbox</p>
+          </div>
+          <div class="today tab tabClicker">
+            <img
+              src="./assets/images/today_icon.svg"
+              alt="Today Icon"
+              class="todayIcon iconTab"
+            />
+            <p class="todayDescription">Today</p>
+          </div>
+          <div class="week tab tabClicker">
+            <img
+              src="./assets/images/week_icon.svg"
+              alt="Week Icon"
+              class="weekIcon iconTab"
+            />
+            <p class="weekDescription">Week</p>
+          </div>
+        </div>
+        <div class="sideNavBarProjects">
+          <h3 class="projectsTitle">Projects</h3>
+          <div class="projectsContainer"></div>
+          <div class="addProject tab">
+            <span class="add">&#43;</span>
+            <p class="addProjectDescription">Add Project</p>
+          </div>
+        </div>
+      </div>
+      <main class="mainContent"></main>
+    </div>
+  </body>
+</html>
