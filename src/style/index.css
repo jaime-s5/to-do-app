@@ -131,6 +131,13 @@
   }
 }
 
+@media screen and (max-width: 575px) {
+  body,
+  .overlay {
+    min-width: 575px;
+  }
+}
+
 .addTodo {
   display: flex;
   align-items: center;
@@ -153,7 +160,7 @@
 .overlay {
   z-index: 2;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
 }
