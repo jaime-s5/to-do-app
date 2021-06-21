@@ -12,10 +12,6 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),
   },
-  devServer: {
-    contentBase: path.resolve(__dirname, 'build'),
-    writeToDisk: true,
-  },
   // Modified config
   plugins: [
     new HtmlWebpackPlugin({
