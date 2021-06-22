@@ -25,6 +25,5 @@ Organize your tasks with custom project tabs and todos.
 - Todos have title, three priority levels, description an due date.
 - Today and week tabs allow you to keep track of todos that have to be done today or this week.
 - Changes saved in local storage so you don't have to keep adding them whenever you open the app.
-- Responsive design
 
 ![Screenshot of todo app](todo.png 'Screenshot of todo app')

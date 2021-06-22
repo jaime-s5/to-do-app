@@ -106,38 +106,6 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-@media screen and (max-width: 900px) {
-  .mainGrid {
-    grid-template-columns: 1fr 3fr;
-  }
-}
-
-@media screen and (max-width: 750px) {
-  .mainGrid {
-    display: block;
-    height: auto;
-  }
-
-  .openNavBar {
-    display: block;
-  }
-
-  .mainContent {
-    padding: 40px 40px 0 40px;
-  }
-
-  .hiddenSmallWidth {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 575px) {
-  body,
-  .overlay {
-    min-width: 575px;
-  }
-}
-
 .addTodo {
   display: flex;
   align-items: center;
@@ -352,4 +320,129 @@
 
 .tabClicker:hover .removeProject span {
   visibility: visible;
+}
+
+@media screen and (max-width: 900px) {
+  .mainGrid {
+    grid-template-columns: 1fr 3fr;
+  }
+
+  h4.cardText {
+    white-space: pre-wrap;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .mainGrid {
+    display: block;
+    height: auto;
+  }
+
+  .openNavBar {
+    display: block;
+  }
+
+  .mainContent {
+    padding: 40px 40px 0 40px;
+  }
+
+  .hiddenSmallWidth {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 555px) {
+  .todoForm,
+  .projectForm,
+  .detailsDiv {
+    width: 80%;
+  }
+
+  .topBarTitle {
+    font-size: 24px;
+  }
+
+  .openNavBar {
+    font-size: 26px;
+  }
+
+  .topBarIcon {
+    width: 40px;
+  }
+
+  .detailsButton {
+    padding: 2px 6px;
+    font-size: 10px;
+  }
+
+  .removeIcon,
+  .editIcon {
+    height: 15px;
+    margin: 0px;
+    padding: 8px 7px;
+  }
+
+  .mainContent {
+    padding: 3% 3% 0 3%;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .projectsTitle {
+    font-size: 16px;
+  }
+
+  .tab {
+    font-size: 13px;
+  }
+
+  .todoCard,
+  .todoLabel,
+  .removeProject span {
+    font-size: 11px;
+  }
+
+  .text,
+  .dueDate,
+  .priority,
+  .project {
+    margin: 7px 0;
+    font-size: 10px;
+  }
+
+  .description {
+    height: 60px;
+  }
+  .topBarTitle {
+    font-size: 20px;
+  }
+
+  .openNavBar {
+    font-size: 16px;
+  }
+
+  .topBarIcon {
+    width: 28px;
+  }
+
+  .addTodo {
+    font-size: 16px;
+  }
+
+  .cardContainer {
+    padding-left: 0px;
+  }
+
+  .cardContainerRight > .cardText,
+  .cardContainerRight > .detailsButton {
+    margin: 2px 5px;
+  }
+
+  .cardContainerLeft > * {
+    margin: 2px;
+  }
+
+  .clickDone {
+    height: 12px;
+  }
 }
