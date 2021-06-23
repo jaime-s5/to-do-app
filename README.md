@@ -2,7 +2,7 @@
 
 ## About the project
 
-A todo list app that allows to manage your tasks by creating todos and organize them in different projects.
+A todo list app that allows to manage your tasks by creating todos and organize them in different projects. Design is heavily inspired in the Todoist app.
 
 ## Built with
 
